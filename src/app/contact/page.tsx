@@ -47,10 +47,10 @@ export default function ContactPage() {
       className="py-6"
     >
       <div className="container mx-auto">
-        <div className="flex flex-col xl:flex-row gap-[30px]">
+        <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-[30px]">
           {/* Formulario */}
-          <div className="xl:h-[54%] order-2 xl:order-none">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 bg-[#27272c] rounded-xl p-10">
+          <div className="bg-[#27272c] rounded-xl p-10">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 w-full">
               <h3 className="text-4xl text-accent">Trabajemos juntos</h3>
               <p className="text-white/60">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit...
@@ -58,18 +58,17 @@ export default function ContactPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Input type="text" placeholder="Nombre" {...register("name")} />
+                  <Input className="w-full" type="text" placeholder="Nombre" {...register("name")} />
                   {errors.name && <p className="text-red-500">{errors.name.message}</p>}
                 </div>
                 <div>
-                  <Input type="text" placeholder="Apellido" {...register("lastName")} />
+                  <Input className="w-full" type="text" placeholder="Apellido" {...register("lastName")} />
                   {errors.lastName && <p className="text-red-500">{errors.lastName.message}</p>}
                 </div>
                 <div>
-                  <Input type="email" placeholder="Correo Electrónico" {...register("email")} />
+                  <Input className="w-full" type="email" placeholder="Correo Electrónico" {...register("email")} />
                   {errors.email && <p className="text-red-500">{errors.email.message}</p>}
                 </div>
-                {/* <Input type="text" placeholder="Teléfono" {...register("phone")} /> */}
               </div>
 
               <div>
@@ -77,7 +76,9 @@ export default function ContactPage() {
                 {errors.message && <p className="text-red-500">{errors.message.message}</p>}
               </div>
 
-              <Button type="submit" size="default" className="max-w-40">Enviar</Button>
+              <Button type="submit" size="default" className="max-w-40">
+                Enviar
+              </Button>
             </form>
           </div>
 
