@@ -38,8 +38,8 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
-    const { firstname, lastname, email, message, phone } = await request.json();
-    console.log('Datos recibidos:', { firstname, lastname, email, message, phone });
+    const { name, lastname, email, message } = await request.json();
+    console.log('Datos recibidos:', { name, lastname, email, message });
 
     // Configurar Nodemailer
     const transporter = nodemailer.createTransport({
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     const cuerpo = `
     <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.5; padding: 20px; border: 1px solid #eaeaea; border-radius: 5px; background-color: #f9f9f9;">
         <h2 style="color: #00466a; font-size: 24px;">Nuevo mensaje de contacto</h2>
-        <p style="font-size: 16px;"><strong>Nombre:</strong> ${firstname} ${lastname}</p>
+        <p style="font-size: 16px;"><strong>Nombre:</strong> ${name} ${lastname}</p>
         <p style="font-size: 16px;"><strong>Email:</strong> ${email}</p>
         <p style="font-size: 16px;"><strong>Mensaje:</strong></p>
         <p style="font-size: 16px; white-space: pre-line; background-color: #f1f1f1; padding: 10px; border-radius: 4px;">${message}</p>
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
     const mailOptions = {
         from: email,
         to: process.env.RECIPIENT_EMAIL, // A quién enviar el correo
-        subject: `Mensaje de ${firstname} ${lastname}`,
+        subject: `Mensaje de ${name} ${lastname}`,
         html: cuerpo,
     };
     console.log('Intentando enviar correo...');

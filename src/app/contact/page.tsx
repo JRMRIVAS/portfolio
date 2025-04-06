@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Swal from "sweetalert2";
 
 const info = [
   { icon: <FaPhoneAlt />, title: "Teléfono", description: "(+503) 7742 8283" },
@@ -25,18 +26,38 @@ export default function ContactPage() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    console.log("Datos enviados:", data);
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
+    try {
+      console.log("Datos enviados:", data);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
 
-    if (response.ok) {
-      alert("Mensaje enviado con éxito.");
-      reset();
-    } else {
-      alert("Error al enviar el mensaje.");
+      if (response.ok) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Mensaje enviado',
+          text: 'Tu mensaje ha sido enviado con éxito.',
+          confirmButtonText: 'Aceptar'
+        });
+        reset();
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error del servidor',
+        text: 'No se pudo conectar con el servidor. Por favor, inténtalo más tarde.',
+        confirmButtonText: 'Aceptar'
+      });
+      console.error("Error al enviar el mensaje:", error);
     }
   };
 

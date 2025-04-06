@@ -56,7 +56,7 @@ export default function Home() {
         }}
         className="container mx-auto h-full">
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
-          <div className="text-center xl:text-left order-2 xl:order-none">
+          <div className="text-center md:text-left order-2 xl:order-none mb-5">
             <span className="text-xl">Desarrollador Front End</span>
             <h1 className="h1 mb-6">Hola Soy <br /> <span className="text-accent">Rodrigo Rivas</span></h1>
             <p className="max-w-[500px] mb-9 text-white/80">Hago todo lo posible para que los proyectos sean de la mas alta calidad, sigo aprendiendo y me gusta el front end demasiado.</p>
