@@ -9,15 +9,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
+import React, { useState } from "react";
 
 const info = [
-  { icon: <FaPhoneAlt />, title: "Teléfono", description: "(+503) 7742 8283" },
+  //{ icon: <FaPhoneAlt />, title: "Teléfono", description: "(+503) 7742 8283" },
   { icon: <FaEnvelope />, title: "Email", description: "jrmrivas21@gmail.com" },
   { icon: <FaMapMarkerAlt />, title: "Ubicación", description: "San Salvador, El Salvador" }
 ];
 
 export default function ContactPage() {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactFormData>({
+  const capitalizeFirstLetter = (text: string) => {
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  };
+
+  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     mode: "onChange" // 👈 Valida en tiempo real mientras se escribe
     //🎯 Opciones alternativas:
@@ -25,7 +30,10 @@ export default function ContactPage() {
     // mode: "all" → Valida tanto al escribir como al salir del campo.
   });
 
+  const [isLoading, setIsLoading] = useState(false); // 👈 Estado para el loader
+
   const onSubmit = async (data: ContactFormData) => {
+    setIsLoading(true); // 🌀 Inicia el loader
     try {
       console.log("Datos enviados:", data);
       const response = await fetch('/api/contact', {
@@ -38,10 +46,15 @@ export default function ContactPage() {
         Swal.fire({
           icon: 'success',
           title: 'Mensaje enviado',
-          text: 'Tu mensaje ha sido enviado con éxito.',
+          text: 'Tu mensaje ha sido enviado con éxito. Pronto recibirás una respuesta.',
           confirmButtonText: 'Aceptar'
         });
-        reset();
+        reset({
+          name: "",
+          lastName: "",
+          email: "",
+          message: "",
+        });
       } else {
         Swal.fire({
           icon: 'error',
@@ -58,6 +71,8 @@ export default function ContactPage() {
         confirmButtonText: 'Aceptar'
       });
       console.error("Error al enviar el mensaje:", error);
+    } finally {
+      setIsLoading(false); // ✅ Finaliza el loader
     }
   };
 
@@ -79,11 +94,19 @@ export default function ContactPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Input className="w-full" type="text" placeholder="Nombre" {...register("name")} />
+                  <Input className="w-full" type="text" placeholder="Nombre" {...register("name")} onBlur={(e) => {
+                    const capitalized = capitalizeFirstLetter(e.target.value);
+                    e.target.value = capitalized;
+                    setValue("name", capitalized);
+                  }} />
                   {errors.name && <p className="text-red-500">{errors.name.message}</p>}
                 </div>
                 <div>
-                  <Input className="w-full" type="text" placeholder="Apellido" {...register("lastName")} />
+                  <Input className="w-full" type="text" placeholder="Apellido" {...register("lastName")} onBlur={(e) => {
+                    const capitalized = capitalizeFirstLetter(e.target.value);
+                    e.target.value = capitalized;
+                    setValue("lastName", capitalized);
+                  }} />
                   {errors.lastName && <p className="text-red-500">{errors.lastName.message}</p>}
                 </div>
                 <div>
@@ -93,12 +116,27 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <Textarea className="h-[200px]" placeholder="Escribe tu mensaje aquí" {...register("message")} />
+                <Textarea className="h-[200px] resize-none" placeholder="Escribe tu mensaje aquí" {...register("message")} />
                 {errors.message && <p className="text-red-500">{errors.message.message}</p>}
               </div>
 
-              <Button type="submit" size="default" className="max-w-40">
-                Enviar
+              <Button
+                type="submit"
+                size="default"
+                className="max-w-40 flex items-center justify-center"
+                disabled={isLoading} // 👈 Lo desactiva mientras se carga
+              >
+                {isLoading ? (
+                  <span className="flex items-center gap-2">
+                    <svg className="animate-spin h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                    </svg>
+                    Enviando...
+                  </span>
+                ) : (
+                  "Enviar"
+                )}
               </Button>
             </form>
           </div>

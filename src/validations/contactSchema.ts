@@ -5,7 +5,8 @@ const nameValidation = (maxLength: number) =>
     z.string()
         .min(2, "Debe tener al menos 2 letras")
         .max(maxLength, `No debe exceder los ${maxLength} caracteres`)
-        .regex(/^[A-Z][a-z]+$/, "Debe comenzar con mayúscula y no contener espacios, números o símbolos");
+        .regex(/^[a-zA-Z]+$/, "No debe contener espacios, números o símbolos");
+        // .regex(/^[A-Z][a-z]+$/, "Debe comenzar con mayúscula y no contener espacios, números o símbolos");
 
 // Esquema de validación
 export const contactSchema = z.object({

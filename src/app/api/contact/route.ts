@@ -38,8 +38,8 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
-    const { name, lastname, email, message } = await request.json();
-    console.log('Datos recibidos:', { name, lastname, email, message });
+    const { name, lastName, email, message } = await request.json();
+    console.log('Datos recibidos:', { name, lastName, email, message });
 
     // Configurar Nodemailer
     const transporter = nodemailer.createTransport({
@@ -50,24 +50,35 @@ export async function POST(request: Request) {
         },
     });
     const cuerpo = `
-    <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.5; padding: 20px; border: 1px solid #eaeaea; border-radius: 5px; background-color: #f9f9f9;">
-        <h2 style="color: #00466a; font-size: 24px;">Nuevo mensaje de contacto</h2>
-        <p style="font-size: 16px;"><strong>Nombre:</strong> ${name} ${lastname}</p>
-        <p style="font-size: 16px;"><strong>Email:</strong> ${email}</p>
-        <p style="font-size: 16px;"><strong>Mensaje:</strong></p>
-        <p style="font-size: 16px; white-space: pre-line; background-color: #f1f1f1; padding: 10px; border-radius: 4px;">${message}</p>
-        <hr style="border-top: 1px solid #ccc; margin: 20px 0;" />
-        <p style="font-size: 14px; color: #555;">
-            Este mensaje fue enviado desde el formulario de contacto de tu sitio web.<br />
-            <em>Rodrigo Rivas Portfolio Desarrollador</em>
-        </p>
+    <div style="font-family: 'Arial', sans-serif; background-color: #1c1c22; color: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #333; max-width: 600px; margin: 0 auto;">
+        <header style="text-align: center; margin-bottom: 20px;">
+            <h1 style="color: #00ff99; font-size: 28px; margin: 0;">Nuevo Mensaje de Contacto</h1>
+            <p style="color: #888; font-size: 14px; margin: 5px 0;">Formulario de contacto - Rodrigo Rivas Portfolio</p>
+        </header>
+        <main>
+            <section style="margin-bottom: 20px;">
+                <h2 style="color: #00ff99; font-size: 20px; border-bottom: 1px solid #444; padding-bottom: 5px;">Detalles del Mensaje</h2>
+                <p style="font-size: 16px; margin: 10px 0;"><strong style="color: #00ff99;">Nombre:</strong> <span style="color: #fff;">${name} ${lastName}</span></p>
+                <p style="font-size: 16px; margin: 10px 0;"><strong style="color: #00ff99;">Email:</strong><span style="color: #fff;">${email}</span> </p>
+            </section>
+            <section style="margin-bottom: 20px;">
+                <h2 style="color: #00ff99; font-size: 20px; border-bottom: 1px solid #444; padding-bottom: 5px;">Mensaje</h2>
+                <p style="font-size: 16px; background-color: #2a2a33; padding: 15px; border-radius: 5px; border: 1px solid #444; white-space: pre-line;">
+                    ${message}
+                </p>
+            </section>
+        </main>
+        <div style="text-align: center; margin-top: 20px; font-size: 14px; color: #888;">
+            <p>Este mensaje fue enviado desde el formulario de contacto de tu sitio web.</p>
+            <p><em style="color: #00ff99;">Rodrigo Rivas Portfolio Desarrollador</em></p>
+        </div>
     </div>
     `;
 
     const mailOptions = {
         from: email,
         to: process.env.RECIPIENT_EMAIL, // A quién enviar el correo
-        subject: `Mensaje de ${name} ${lastname}`,
+        subject: `Mensaje de ${name} ${lastName}`,
         html: cuerpo,
     };
     console.log('Intentando enviar correo...');
