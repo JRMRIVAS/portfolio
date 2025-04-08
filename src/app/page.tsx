@@ -26,7 +26,7 @@ export default function Home() {
 
   const [isCopied, setIsCopied] = useState(false); // Estado para cambiar el ícono
 
-  const email = "jrmrivas21@gmail.com"; // Tu correo electrónico
+  const email = "rodrivaswork@gmail.com"; // Tu correo electrónico
 
   // Función para copiar al portapapeles
   const handleCopy = async () => {
@@ -76,7 +76,7 @@ export default function Home() {
               </div> */}
             </div>
 
-            <div className="flex items-center space-x-5 rounded-full border border-accent px-8 w-80 uppercase tracking-wider  h-[44px]">
+            <div className="flex mx-auto xl:mx-0 items-center space-x-5 rounded-full border border-accent px-5 w-[20.5rem] tracking-wider  h-[44px]">
               <span className="text-accent">{email}</span>
               <button
                 onClick={handleCopy}

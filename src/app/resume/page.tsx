@@ -2,12 +2,13 @@
 
 import { Description } from "@radix-ui/react-dialog";
 import { FaHtml5, FaCss3, FaJs, FaReact, FaAngular, FaBootstrap } from "react-icons/fa"
-import { SiTailwindcss, SiPrimeng, SiTypescript } from "react-icons/si"
+import { SiTailwindcss, SiPrimeng, SiTypescript, SiNextdotjs  } from "react-icons/si"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
 import { li } from "framer-motion/m";
+import { calculateExperience } from "./utils/calculateExperience";
 //About data
 const about = {
   title: "Un poco mas sobre mí",
@@ -17,22 +18,22 @@ const about = {
       fieldName: "Nombre",
       fieldValue: "Rodrigo Rivas",
     },
-    {
-      fieldName: "Teléfono",
-      fieldValue: "(+503) 7742 8283",
-    },
+    // {
+    //   fieldName: "Teléfono",
+    //   fieldValue: "(+503) 7742 8283",
+    // },
     {
       fieldName: "Experiencia",
-      fieldValue: "1 Año",
-    },
-    {
-      fieldName: "Correo",
-      fieldValue: "jrmrivas21@gmail.com",
+      fieldValue: calculateExperience("2023-08-01"),
     },
     {
       fieldName: "Idiomas",
-      fieldValue: "Inglés, Francés",
-    }
+      fieldValue: "Inglés",
+    },
+    {
+      fieldName: "Correo",
+      fieldValue: "rodrivaswork@gmail.com",
+    },
   ]
 };
 
@@ -42,6 +43,11 @@ const experience = {
   title: 'Mi experiencia',
   descripcion: "A lo largo de mi carrera, he asumido roles diversos, lo que me ha convertido en un profesional versátil, capaz de tomar decisiones basadas en fundamentos técnicos. Mi objetivo y mi meta es escribir código limpio, eficiente y seguir aprendiendo para ofrecer soluciones innovadoras en cada proyecto.",
   items: [
+    {
+      company: "Premier Distribution/The Tecwave",
+      position: "Desarrollador Frontend",
+      duration: "2024 - Actualidad"
+    },
     {
       company: "(Cliente Confidencial - NDA)",
       position: "Desarrollador Frontend",
@@ -130,6 +136,10 @@ const skills = {
       icon: <SiTypescript />,
       name: "typescript"
     },
+    {
+      icon: <SiNextdotjs  />,
+      name: "next.js"
+    },
   ]
 }
 
@@ -204,22 +214,28 @@ export default function ResumePage() {
                   <h3 className="text-4xl font-bold text-accent">{skills.title}</h3>
                   <p className="max-w-[600px] text-white/70 mx-auto xl:mx-0">{skills.description}</p>
                 </div>
-                <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 xl:gap-[30px]">
+                <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 xl:gap-[30px] px-3 md:px-0">
                   {skills.skillList.map((skill, index) => {
                     return (
                       <li key={index}>
                         <TooltipProvider delayDuration={100}>
                           <Tooltip>
                             <TooltipTrigger className="w-full h-[150px] bg-[#232329] rounded-xl flex  justify-center items-center group">
-                              <div className="text-6xl group-hover:text-accent transition-all duration-300">
-                                {skill.icon}
+                              <div className="flex flex-col items-center justify-center gap-5 ">
+                                <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                                  {skill.icon}
+                                </div>
+                                <p className="capitalize ">
+                                  {skill.name}
+                                </p>
                               </div>
+                              
                             </TooltipTrigger>
-                            <TooltipContent>
+                            {/* <TooltipContent className=" hidden lg:block">
                               <p className="capitalize">
                                 {skill.name}
                               </p>
-                            </TooltipContent>
+                            </TooltipContent> */}
                           </Tooltip>
                         </TooltipProvider>
                       </li>

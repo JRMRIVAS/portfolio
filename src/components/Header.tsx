@@ -9,6 +9,8 @@ import MobileNav from "./MobileNav";
 
 
 export default function Header() {
+
+
     return (
         <header className="py-8 xl:py-12 text-white ">
             <div className="container mx-auto px-3 flex justify-between items-center">
@@ -22,8 +24,8 @@ export default function Header() {
                 {/* desktop nav */}
                 <div className="hidden xl:flex items-center gap-8">
                     <Nav/>
-                    <Link href="/">
-                        <Button>Hire me</Button>
+                    <Link href="/contact">
+                        <Button >Colaboremos</Button>
                     </Link>
                 </div>
                 {/* mobile nav */}

@@ -9,16 +9,18 @@ export default function Photo() {
         <div className="h-full w-full relative">
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { delay: 1, duration: 0.4, ease: 'easeIn' } }}
+                animate={{ opacity: 1, transition: { delay: 1, duration: 0.4, ease: 'easeInOut' } }}
             >
                 {/* imagen */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1, transition: { delay: 1, duration: 0.4, ease: 'easeInOut' } }}
-                    className="w-[300px] h-[300px] xl:w-[500px] xl:h-[500] mix-blend-lighten absolute "
+                    className="w-[300px] h-[300px] xl:w-[500px] xl:h-[500px] mix-blend-lighten absolute"
                 >
+
+                    {/* Imagen */}
                     <Image
-                        src="/assets/prubaport.png"
+                        src="/assets/profile.webp"
                         alt="profilePhoto"
                         priority
                         quality={100}
@@ -38,7 +40,7 @@ export default function Photo() {
                         strokeWidth="4"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        initial={{strokeDasharray: "24 10 0 0"}}
+                        initial={{ strokeDasharray: "24 10 0 0" }}
                         animate={{
                             strokeDasharray: ["15 120 25 25", "16 25 92 72", "4 250 22 22"],
                             rotate: [120, 360],
@@ -49,7 +51,7 @@ export default function Photo() {
                             repeat: Infinity,
                             repeatType: "reverse"
                         }}
-                        >
+                    >
 
                     </motion.circle>
                 </motion.svg>

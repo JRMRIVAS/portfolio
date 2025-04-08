@@ -17,7 +17,7 @@ const projects = [
     num: "01",
     category: "frontend",
     title: "project 1",
-    description: "RTM",
+    description: "pagina enfocada en ... ",
     stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Typescript" }, { name: "Angular" }, { name: "PrimeNg" }],
     image: "/assets/work/thumb1.png"
   },
@@ -25,7 +25,7 @@ const projects = [
     num: "02",
     category: "frontend",
     title: "project 2",
-    description: "ERP",
+    description: "Landingpage sobre...",
     stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Typescript" }, { name: "Angular" }, { name: "PrimeNg" }],
     image: "/assets/work/thumb2.png"
   },
@@ -33,7 +33,7 @@ const projects = [
     num: "03",
     category: "frontend",
     title: "Company Website",
-    description: "RTM",
+    description: "pagina enfocada en ... ",
     stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }, { name: "React" }, { name: "Tailwind" }],
     image: "/assets/work/thumb3.png"
   }

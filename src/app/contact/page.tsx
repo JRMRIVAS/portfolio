@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const info = [
   //{ icon: <FaPhoneAlt />, title: "Teléfono", description: "(+503) 7742 8283" },
@@ -31,6 +31,7 @@ export default function ContactPage() {
   });
 
   const [isLoading, setIsLoading] = useState(false); // 👈 Estado para el loader
+
 
   const onSubmit = async (data: ContactFormData) => {
     setIsLoading(true); // 🌀 Inicia el loader
@@ -83,13 +84,14 @@ export default function ContactPage() {
       className="py-6"
     >
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-[30px]">
+        {/* <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-[30px]"> */}
+        <div className="grid grid-cols-1  gap-[30px]">
           {/* Formulario */}
           <div className="bg-[#27272c] rounded-xl p-10">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 w-full">
               <h3 className="text-4xl text-accent">Trabajemos juntos</h3>
               <p className="text-white/60">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit...
+              Contame tu idea, proyecto o desafío. Yo me encargo de convertirlo en una solución funcional y a tu medida. ¡Te leo!
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -142,7 +144,7 @@ export default function ContactPage() {
           </div>
 
           {/* Información de contacto */}
-          <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
+          {/* <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
             <ul className="flex flex-col gap-10">
               {info.map((item, index) => (
                 <li key={index} className="flex items-center gap-6">
@@ -156,7 +158,7 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     </motion.section>
