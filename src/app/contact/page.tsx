@@ -91,7 +91,7 @@ export default function ContactPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 w-full">
               <h3 className="text-4xl text-accent">Trabajemos juntos</h3>
               <p className="text-white/60">
-              Contame tu idea, proyecto o desafío. Yo me encargo de convertirlo en una solución funcional y a tu medida. ¡Te leo!
+              Cuentame tu idea, proyecto o desafío. Yo me encargo de convertirlo en una solución funcional y a tu medida. ¡Te leo!
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
