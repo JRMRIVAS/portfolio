@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 export default function Home() {
   const handleDownload = () => {
     // Aquí especificamos la ruta al archivo PDF que queremos descargar
-    const fileUrl = '/CV_RodrigoRivas.pdf';
+    const fileUrl = '/CV_RodrigoRivas_2025.pdf';
     const link = document.createElement('a');
     link.href = fileUrl;
     link.download = 'CV_RodrigoRivas.pdf'; // Nombre con el que se descargará el archivo
